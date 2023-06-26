@@ -1,0 +1,45 @@
+<mxfile host="65bd71144e">
+    <diagram id="BNRo5XhxJc0laISqE_hT" name="Page-1">
+        <mxGraphModel dx="750" dy="370" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="App.js" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="300" width="130" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="NavBar.js" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="60" width="80" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Home.js" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="370" y="50" width="80" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="MyAccount.js" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry y="150" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <object label="Fantasy Dashboard.js" hedietLinkedDataV1_path="../README.md" hedietLinkedDataV1_start_col_x-num="0" hedietLinkedDataV1_start_line_x-num="0" hedietLinkedDataV1_end_col_x-num="0" hedietLinkedDataV1_end_line_x-num="0" id="13">
+                    <mxCell style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                        <mxGeometry x="110" y="150" width="80" height="40" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="14" value="NFL schedule.js" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="150" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="150" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="470" y="220" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="300" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="310" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
