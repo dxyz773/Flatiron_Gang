@@ -161,6 +161,39 @@ class GameById(Resource):
     
 api.add_resource(GameById, '/games/<int:id>')
 
+class Users(Resource):
+    def get(self):
+        all_users = User.query.all()
+
+        users_dict = [user.to_dict(only=('id', 'name', 'username')) for user in all_users]
+
+        response = make_response(users_dict, 200)
+
+        return response
+    
+api.add_resources(Users, '/users')
+
+class UserById(Resource):
+    def get(self,id):
+        user = User.query.filter(User.id==id).first()
+
+        response = make_response(user.to_dict(only=('id', 'name', 'username')), 200)
+
+        return response
+    
+    def delete(self, id):
+         user = User.query.filter(User.id==id).first()
+
+         db.session.delete(user.to_dict())
+         db.commit()
+
+         return make_response({}, 204)
+
+
+    
+api.add_resource(UserById, '/users/<int:id>')
+
+
 
 
 
