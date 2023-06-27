@@ -46,6 +46,27 @@ A User can:
 
 ## API Routes
 
+
+
+=======
+| **Name** | **API endpoint**   | **HTTP verb** | **Purpose**                                                                                                                                       |
+|----------|--------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| RETRIEVE | /players           | **GET**       | [{...}, {...}, ...]                                                                                                                               |
+| RETRIEVE | /players/:id       | **GET**       | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
+| UPDATE   | /players/:id       | **PATCH**     | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
+| RETRIEVE | /fantasy_teams     | **GET**       | [{...},{...}, ...]                                                                                                                                |
+| CREATE   | /fantasy_teams     | **POST**      | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
+| RETRIEVE | /fantasy_teams/:id | **GET**       | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
+| UPDATE   | /fantasy_teams/:id | **PATCH**     | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
+| RETRIEVE | /games             | **GET**       | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
+| UPDATE   | /games/:id         | **PATCH**     | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
+| RETRIEVE | /games/:id         | **GET**       | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
+| CREATE   | /games             | **POST**      | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
+| RETRIEVE | /users             | **GET**       | [{...}, {...}, ...]                                                                                                                               |
+| RETRIEVE | /users/:id         | **GET**       | {'id', 'name', 'username'}                                                                                                                        |
+| DELETE   | /users/:id         | **DELETE**    | {}                                                                                                                                                |
+
+---
 ## Trello
 
 <img src="imgs/Trello.png" width = 900>
