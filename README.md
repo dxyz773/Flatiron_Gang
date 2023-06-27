@@ -14,29 +14,38 @@
 
 ## User Stories
 
-Users should:
+A Users can:
 
-Create and personalize my fantasy football team by selecting players from a variety of teams and positions.
+- Create and personalize my fantasy football team by selecting players from a variety of teams and positions.
+- Have a user-friendly interface that allows them to readily navigate through the app's various sections, such as team management, league standings, and player statistics.
+- Access a comprehensive player database containing detailed player profiles, historical performance data, and expert analysis to facilitate strategic decision-making.
+- Participate in weekly matches
+- Compete against other teams in League
+- Receive updates regarding player injuries, lineup changes.
 
-Have a user-friendly interface that allows me to readily navigate through the app's various sections, such as team management, league standings, and player statistics.
+---
 
-Access a comprehensive player database containing detailed player profiles, historical performance data, and expert analysis to facilitate strategic decision-making.
+## React Tree
 
-Participate in weekly matches
-Compete against other teams in League
+## <img src="imgs/ReactTree.png">
 
-Receive alerts and updates regarding player injuries, lineup changes.
+## Client Side Routes
 
-A User can:
-
-- GET all users
-- GET user by id
-- DELETE user by id
-- GET, POST, and UPDATE their fantasy team
-- GET all players
-- GET player by id
-- GET all games
-- GET gamesd by id
+| **Client Route**             | **Component**         |
+| ---------------------------- | --------------------- |
+| /home                        | Home.js               |
+| /account                     | Account.js            |
+| /dashboard                   | FantasyDashboard.js   |
+| /fantasy_teams               | FantasyTeams.js       |
+| /fantasy_teams/:name         | OneFantasyTeam.js     |
+| /fantasy_teams/players       | FantasyTeamPlayers.js |
+| /fantasy_teams/players/:name | OneTeamPlayer.js      |
+| /game                        | Game.js               |
+| /fantasy_teams/players/stats | FantasyPlayerStats.js |
+| /signup                      | UserSignup.js         |
+| /login                       | UserLogin.js          |
+| /nfl/news                    | News.js               |
+| /nfl/schedule                | NFLSchedule.js        |
 
 ---
 
@@ -44,13 +53,12 @@ A User can:
 
 <img src="imgs/ERD.png" width=700>
 
+---
+
 ## API Routes
 
-
-
-=======
 | **Name** | **API endpoint**   | **HTTP verb** | **Purpose**                                                                                                                                       |
-|----------|--------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RETRIEVE | /players           | **GET**       | [{...}, {...}, ...]                                                                                                                               |
 | RETRIEVE | /players/:id       | **GET**       | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
 | UPDATE   | /players/:id       | **PATCH**     | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
@@ -67,6 +75,7 @@ A User can:
 | DELETE   | /users/:id         | **DELETE**    | {}                                                                                                                                                |
 
 ---
+
 ## Trello
 
 <img src="imgs/Trello.png" width = 900>
