@@ -43,20 +43,6 @@ A User can:
 
 ## Entity Relationship Diagram
 
-# <img src="imgs/Entity Relationship Diagram.png" width=600 height=500>
-
----
+<img src="imgs/ERD.png" width=700>
 
 ## API Routes
-
-| **Name** | **API endpoint**   | **HTTP verb** | **Purpose**                                                |
-| -------- | ------------------ | ------------- | ---------------------------------------------------------- |
-| RETRIEVE | /players           | **GET**       | [{...}, {...}, ...]                                        |
-| RETRIEVE | /players/:id       | **GET**       | {'id', 'name', 'position', 'nfl_team', 'bye-week','stats'} |
-| DELETE   | /players/:id       | **DELETE**    | {}                                                         |
-| RETRIEVE | /fantasy_teams     | **GET**       | [{...},{...}, ...]                                         |
-| CREATE   | /fantasy_teams     | **POST**      | {'id','team_name', 'player_id', 'league_id', 'user_id'}    |
-| RETRIEVE | /fantasy_teams/:id | **GET**       | {'id','team_name', 'player_id', 'league_id', 'user_id'}    |
-| UPDATE   | /fantasy_teams/:id | **PATCH**     | {'id','team_name', 'player_id', 'league_id', 'user_id'}    |
-| RETRIEVE | /users             | **GET**       | [{...}, {...}, ...]                                        |
-| RETRIEVE | /users/:id         | **GET**       | {'id', 'name', 'username'}                                 |
