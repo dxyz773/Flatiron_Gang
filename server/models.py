@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import validates, backref
 from sqlalchemy import MetaData
 
 convention = {
@@ -26,9 +26,9 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
     # relationships
     fantasy_teams = db.relationship(
-        "FantasyTeam", back_populates="owner", cascade="all, delete-orphan"
+        "FantasyTeam", backref=backref("user"), cascade="all, delete-orphan"
     )
-    players = association_proxy("fantasy_team", "players")
+    serialize_rules = ("-fantasy_teams.user", "created_at", "-updated_at")
 
 
 class FantasyTeam(db.Model, SerializerMixin):
@@ -41,12 +41,20 @@ class FantasyTeam(db.Model, SerializerMixin):
     team_name = db.Column(db.String, nullable=False)
     # foreign keys N
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    player_id = db.Column(db.Integer, db.ForeignKey("players.id"))
     league_id = db.Column(db.Integer, db.ForeignKey("fantasy_leagues.id"))
-    # relationships
-    owner = db.relationship("User", back_populates="fantasy_teams")
-    players = db.relationship("Player", back_populates="fantasy_teams")
-    league = db.relationship("FantasyLeague", back_populates="fantasy_teams")
+    #  relationships
+    games = db.relationship(
+        "Game", backref=backref("fantasy_team"), cascade="all, delete-orphan"
+    )
+    players = db.relationship(
+        "Player", backref=backref("fantasy_team"), cascade="all, delete-orphan"
+    )
+    serialize_rules = (
+        "-user.fantasy_teams",
+        "-fantasy_league.fantasy_teams",
+        "-games.fantasy_team",
+        "-players.fantasy_team",
+    )
 
 
 class Player(db.Model, SerializerMixin):
@@ -59,23 +67,6 @@ class Player(db.Model, SerializerMixin):
     position = db.Column(db.String, nullable=False)
     nfl_team = db.Column(db.String, nullable=False)
     bye_week = db.Column(db.Integer, nullable=False)
-    # foreign key
-    game_stat_id = db.Column(db.Integer, db.ForeignKey("game_stats.id"))
-    # relationships
-    stats = db.relationship("GameStat", back_populates="player")
-    fantasy_teams = db.relationship(
-        "FantasyTeam", back_populates="players", cascade="all, delete-orphan"
-    )
-    managers = association_proxy("fantasy_teams", "owner")
-
-
-class GameStat(db.Model, SerializerMixin):
-    __tablename__ = "game_stats"
-
-    id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-    # class specific
     week_1_points = db.Column(db.Integer)
     week_2_points = db.Column(db.Integer)
     week_3_points = db.Column(db.Integer)
@@ -92,8 +83,9 @@ class GameStat(db.Model, SerializerMixin):
     week_14_points = db.Column(db.Integer)
     playoff_points = db.Column(db.Integer)
     championship_points = db.Column(db.Integer)
-    # relationship
-    player = db.relationship("Player", back_populates="stats")
+    # foreign key
+    fantasy_team_id = db.Column(db.Integer, db.ForeignKey("fantasy_teams.id"))
+    serialize_rules = ("-fantasy_team.players",)
 
 
 class FantasyLeague(db.Model, SerializerMixin):
@@ -105,11 +97,21 @@ class FantasyLeague(db.Model, SerializerMixin):
     # class specific
     name = db.Column(db.String, nullable=False)
     # relationships
-    fantasy_teams = db.relationship("FantasyTeam", back_populates="league")
+    fantasy_teams = db.relationship(
+        "FantasyTeam", backref=backref("fantasy_league"), cascade="all, delete-orphan"
+    )
+    serialize_rules = ("-fantasy_teams.fantasy_league",)
 
-    # class Game(db.Model, SerializerMixin):
-    #     __tablename__ = "games"
-    #     id = db.Column(db.Integer, primary_key=True)
-    #     created_at = db.Column(db.DateTime, server_default=db.func.now())
-    #     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-    #     # class specific
+
+class Game(db.Model, SerializerMixin):
+    __tablename__ = "games"
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    # class specific
+    team_1_id = db.Column(db.Integer, db.ForeignKey("fantasy_teams.id"))
+    team_2_id = db.Column(db.Integer)
+    team_1_score = db.Column(db.Integer)
+    team_2_score = db.Column(db.Integer)
+    winner_id = db.Column(db.Integer)
+    serialize_rules = ("-fantasy_team.games",)
