@@ -59,7 +59,53 @@ api.add_resource(PlayerById,'/players/<int:id>')
 
 class FantasyTeams(Resource):
     def get(self):
-        pass
+        all_teams = FantasyTeam.query.all()
+        teams_dict = [team.to_dict(only=('id','team_name', 'league_id', 'user_id')) for team in all_teams]
+        response = make_response(teams_dict, 200)
+        return response
+    
+    def post(self):
+        data = request.get_json()
+
+        new_data = FantasyTeam(
+            team_name = data.get('team_name'),
+            league_id = data.get('league_id'),
+            user_id = data.get('user_id')
+        )
+
+        db.session.add(new_data.to_dict())
+        db.session.commit()
+
+        response = make_response(new_data.to_dict(only=('id','team_name', 'league_id', 'user_id')), 201)
+        return response
+    
+api.add_resource(FantasyTeams,'/fantasy_teams')
+
+class FantasyTeamsById(Resource):
+    def get(self, id):
+        fantasy_team = FantasyTeam.query.filter(FantasyTeam.id==id).first()
+
+        response = make_response(fantasy_team.to_dict(only=('id','team_name', 'league_id', 'user_id')), 200)
+
+        return response
+    
+    def patch(self, id):
+        fantasy_team = FantasyTeam.query.filter(FantasyTeam.id==id).first()
+
+        data = request.get_json()
+
+        for attr in data:
+            setattr(fantasy_team, attr, data.get(attr))
+
+        db.session.add(fantasy_team.to_dict())
+        db.session.commit()
+
+        response = make_response(fantasy_team.to_dict(only=('id','team_name', 'league_id', 'user_id')), 202)
+
+        return response
+
+    
+api.add_resource(FantasyTeamsById, '/fantasy_teams/<int:id>')
 
 
 
