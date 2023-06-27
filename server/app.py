@@ -107,6 +107,61 @@ class FantasyTeamsById(Resource):
     
 api.add_resource(FantasyTeamsById, '/fantasy_teams/<int:id>')
 
+class Games(Resource):
+    def get(self):
+        all_games = Game.query.all()
+        games_dict = [game.to_dict(only=('id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id')) for game in all_games]
+
+        response = make_response(games_dict, 200)
+        return response
+    
+    def post(self):
+        data = request.get_json()
+        new_data = Game(
+            team_1_id = data.get('team_1_id'),
+            team_2_id = data.get('team_2_id'),
+            team_1_score = data.get('team_1_score'),
+            team_2_score = data.get('team_2_score'),
+            winner_id = data.get('winner_id')
+        )
+
+        db.session.add(new_data.to_dict())
+        db.session.commit()
+
+        response = make_response(new_data.to_dict(only=('id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id')), 201)
+
+        return response
+        
+api.add_resource(Games, '/games')
+
+
+class GameById(Resource):
+    def get(self, id):
+        game = Game.query.filter(Game.id==id).first()
+
+        response = make_response(game.to_dict(only=('id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id')), 200)
+
+        return response
+    
+    def patch(self, id):
+        game = Game.query.filter(Game.id==id).first()
+
+        data = request.get_json()
+
+        for attr in data:
+            setattr(game, attr, data.get(attr))
+
+        db.session.add(game.to_dict)
+        db.session.commit()
+
+        response = make_response(game.to_dict(only=('id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id')), 202)
+
+        return response
+
+    
+api.add_resource(GameById, '/games/<int:id>')
+
+
 
 
 
