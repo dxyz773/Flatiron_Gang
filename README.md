@@ -29,15 +29,14 @@ Receive alerts and updates regarding player injuries, lineup changes.
 
 A User can:
 
-- GET all players info
-- GET individual player info
-- POST and DELETE a Player from Team
-- Like a Player to put in personalized player list (queue)
-- UPDATE usersname and name
-- GET all user Leagues
-- GET all user Teams
-- POST new fantsay League or Team
-- UPDATE team name or league name
+- GET all users
+- GET user by id
+- DELETE user by id
+- GET, POST, and UPDATE their fantasy team
+- GET all players
+- GET player by id
+- GET all games
+- GET gamesd by id
 
 ---
 
@@ -46,3 +45,7 @@ A User can:
 <img src="imgs/ERD.png" width=700>
 
 ## API Routes
+
+## Trello
+
+<img src="imgs/Trello.png" width = 900>
