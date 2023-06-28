@@ -395,7 +395,7 @@ class Users(Resource):
         return response
 
 
-api.add_resources(Users, "/users")
+api.add_resource(Users, "/users")
 
 
 class UserById(Resource):
