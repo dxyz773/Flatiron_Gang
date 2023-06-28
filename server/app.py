@@ -1,4 +1,4 @@
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, session
 from flask_restful import Api, Resource
 from flask_migrate import Migrate
 from models import db, User, FantasyLeague, FantasyTeam, Player, Game
@@ -211,6 +211,41 @@ class UserById(Resource):
 
     
 api.add_resource(UserById, '/users/<int:id>')
+
+
+class Login(Resource):
+
+    def post(self):
+
+        username = request.get_json()['username']
+        user = User.query.filter(User.username==username)
+
+        password = request.get_json()['password']
+
+        if user.authenticate(password):
+            session['user_id'] = user.id
+            return make_response(user.to_dict(),200)
+        return make_response({'error': 'Invalid username or password'}, 401)
+    
+
+class CheckSession(Resource):
+
+    def get(self):
+        user =User.query.filter(User.id==session.get('user_id')).first()
+        if user:
+            return make_response(user.to_dict(), 200)
+        else:
+            return make_response({'message': '401: Not Authorized'}, 401)
+        
+api.add_resource(CheckSession, '/check_session')
+
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return make_response({'message': '204: No Content'}, 204)
+    
+api.add_resource(Logout, '/logout')
 
 
 
