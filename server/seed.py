@@ -1,5 +1,5 @@
-from models import db, User, FantasyLeague, FantasyTeam, Player, Game
-from app import app
+from models import User, FantasyLeague, FantasyTeam, Player, Game
+from config import app, db
 from random import choice
 
 with app.app_context():
