@@ -30,7 +30,10 @@ class User(db.Model, SerializerMixin):
     fantasy_teams = db.relationship(
         "FantasyTeam", backref=backref("user"), cascade="all, delete-orphan"
     )
-    serialize_rules = ("-fantasy_teams.user", "created_at", "-updated_at")
+    serialize_rules = ("-fantasy_teams.user", "-created_at", "-updated_at", "-_password_hash")
+
+    def __repr__(self):
+        return f'user {self.username}, iD {self.id}'
 
     @hybrid_property
     def password_hash(self):
