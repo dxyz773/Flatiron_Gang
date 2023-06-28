@@ -63,6 +63,10 @@ api.add_resource(Players, "/players")
 class PlayerById(Resource):
     def get(self, id):
         player = Player.query.filter(Player.id == id).first()
+
+        if not player:
+            return make_response({'error': 'Player not found'}, 404)
+
         response = make_response(
             player.to_dict(
                 only=(
@@ -97,13 +101,24 @@ class PlayerById(Resource):
     def patch(self, id):
         player = Player.query.filter(Player.id == id).first()
 
+        if not player:
+            return make_response({'error': 'Player not found'}, 404)
+
+
         data = request.get_json()
 
-        for attr in data:
-            setattr(player, attr, data.get(attr))
+        try:
 
-        db.session.add(player.to_dict())
-        db.session.commit()
+            for attr in data:
+                setattr(player, attr, data.get(attr))
+
+            db.session.add(player.to_dict())
+            db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]},400)
+
+        
 
         response = make_response(
             player.to_dict(
@@ -153,14 +168,20 @@ class FantasyTeams(Resource):
     def post(self):
         data = request.get_json()
 
-        new_data = FantasyTeam(
-            team_name=data.get("team_name"),
-            league_id=data.get("league_id"),
-            user_id=data.get("user_id"),
+        try:
+
+            new_data = FantasyTeam(
+                team_name=data.get("team_name"),
+                league_id=data.get("league_id"),
+                user_id=data.get("user_id"),
         )
 
-        db.session.add(new_data.to_dict())
-        db.session.commit()
+            db.session.add(new_data.to_dict())
+            db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]}, 400)
+            
 
         response = make_response(
             new_data.to_dict(only=("id", "team_name", "league_id", "user_id")), 201
@@ -175,6 +196,9 @@ class FantasyTeamsById(Resource):
     def get(self, id):
         fantasy_team = FantasyTeam.query.filter(FantasyTeam.id == id).first()
 
+        if not fantasy_team:
+            return make_response({'error': 'FantasyTeam not found'}, 404)
+
         response = make_response(
             fantasy_team.to_dict(only=("id", "team_name", "league_id", "user_id")), 200
         )
@@ -184,13 +208,22 @@ class FantasyTeamsById(Resource):
     def patch(self, id):
         fantasy_team = FantasyTeam.query.filter(FantasyTeam.id == id).first()
 
+        if not fantasy_team:
+            return make_response({'error': 'FantasyTeam not found'}, 404)
+       
         data = request.get_json()
 
-        for attr in data:
-            setattr(fantasy_team, attr, data.get(attr))
+        try:
 
-        db.session.add(fantasy_team.to_dict())
-        db.session.commit()
+            for attr in data:
+                setattr(fantasy_team, attr, data.get(attr))
+
+                db.session.add(fantasy_team.to_dict())
+                db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]},400)
+
 
         response = make_response(
             fantasy_team.to_dict(only=("id", "team_name", "league_id", "user_id")), 202
@@ -224,16 +257,23 @@ class Games(Resource):
 
     def post(self):
         data = request.get_json()
-        new_data = Game(
-            team_1_id=data.get("team_1_id"),
-            team_2_id=data.get("team_2_id"),
-            team_1_score=data.get("team_1_score"),
-            team_2_score=data.get("team_2_score"),
-            winner_id=data.get("winner_id"),
+
+        try:
+
+            new_data = Game(
+                team_1_id=data.get("team_1_id"),
+                team_2_id=data.get("team_2_id"),
+                team_1_score=data.get("team_1_score"),
+                team_2_score=data.get("team_2_score"),
+                winner_id=data.get("winner_id"),
         )
 
-        db.session.add(new_data.to_dict())
-        db.session.commit()
+            db.session.add(new_data.to_dict())
+            db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]}, 400)
+
 
         response = make_response(
             new_data.to_dict(
@@ -259,6 +299,10 @@ class GameById(Resource):
     def get(self, id):
         game = Game.query.filter(Game.id == id).first()
 
+        if not game:
+            return make_response({'error': 'Game not found'}, 404)
+
+
         response = make_response(
             game.to_dict(
                 only=(
@@ -278,13 +322,22 @@ class GameById(Resource):
     def patch(self, id):
         game = Game.query.filter(Game.id == id).first()
 
+        if not game:
+            return make_response({'error': 'Game not found'}, 404)
+
         data = request.get_json()
 
-        for attr in data:
-            setattr(game, attr, data.get(attr))
+        try:
 
-        db.session.add(game.to_dict)
-        db.session.commit()
+            for attr in data:
+                setattr(game, attr, data.get(attr))
+
+                db.session.add(game.to_dict)
+                db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]},400)
+
 
         response = make_response(
             game.to_dict(
@@ -321,14 +374,21 @@ class Users(Resource):
     def post(self):
         data = request.get_json()
 
-        new_data = User(
-            name=data.get("name"),
-            username=data.get("username"),
-            password=data.get("password"),
+        try:
+
+            new_data = User(
+                name=data.get("name"),
+                username=data.get("username"),
+                password=data.get("password"),
         )
 
-        db.session.add(new_data.to_dict())
-        db.session.commit()
+            db.session.add(new_data.to_dict())
+            db.session.commit()
+
+        except:
+            return make_response({"errors": ["validation errors"]}, 400)
+
+
 
         response = make_response(new_data.to_dict(only=("id", "name", "username")), 201)
 
@@ -342,12 +402,21 @@ class UserById(Resource):
     def get(self, id):
         user = User.query.filter(User.id == id).first()
 
+        if not user:
+             return make_response({'error': 'User not found'}, 404)
+       
+
+
         response = make_response(user.to_dict(only=("id", "name", "username")), 200)
 
         return response
 
     def delete(self, id):
         user = User.query.filter(User.id == id).first()
+
+        if not user:
+             return make_response({'error': 'User not found'}, 404)
+       
 
         db.session.delete(user.to_dict())
         db.commit()
