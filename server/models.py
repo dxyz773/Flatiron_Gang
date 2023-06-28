@@ -1,20 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates, backref
-from sqlalchemy import MetaData
 from sqlalchemy.ext.hybrid import hybrid_property
-from app import bcrypt
-
-convention = {
-    "ix": "ix_%(column_0_label)s",
-    "uq": "uq_%(table_name)s_%(column_0_name)s",
-    "ck": "ck_%(table_name)s_%(constraint_name)s",
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-    "pk": "pk_%(table_name)s",
-}
-metadata = MetaData(naming_convention=convention)
-db = SQLAlchemy(metadata=metadata)
+from config import db, bcrypt
 
 
 class User(db.Model, SerializerMixin):
@@ -30,23 +17,27 @@ class User(db.Model, SerializerMixin):
     fantasy_teams = db.relationship(
         "FantasyTeam", backref=backref("user"), cascade="all, delete-orphan"
     )
-    serialize_rules = ("-fantasy_teams.user", "-created_at", "-updated_at", "-_password_hash")
+    serialize_rules = (
+        "-fantasy_teams.user",
+        "-created_at",
+        "-updated_at",
+        "-_password_hash",
+    )
 
     def __repr__(self):
-        return f'user {self.username}, iD {self.id}'
+        return f"user {self.username}, iD {self.id}"
 
     @hybrid_property
     def password_hash(self):
         return self._password_hash
-    
+
     @password_hash.setter
     def password_hash(self, password):
-        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
-        self._password_hash = password_hash.decode('utf-8')
+        password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
+        self._password_hash = password_hash.decode("utf-8")
 
     def authenticate(self, password):
-        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
-
+        return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
 
 class FantasyTeam(db.Model, SerializerMixin):
