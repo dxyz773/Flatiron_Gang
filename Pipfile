@@ -10,6 +10,10 @@ flask-migrate = "*"
 sqlalchemy-serializer = "*"
 faker = "*"
 flask-restful = "*"
+flask-cors = "*"
+flask-bcrypt = "*"
+honcho = "*"
+gunicorn = "*"
 
 [dev-packages]
 
