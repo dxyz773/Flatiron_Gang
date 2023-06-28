@@ -1,7 +1,7 @@
 function Navbar() {
   return (
     <div className="container">
-      Flatiron Gang Fantasy Football League Manager
+      <h4>Flatiron Gang Fantasy Football League Manager</h4>
     </div>
   );
 }
