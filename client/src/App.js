@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import React from "react";
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+
+import Account from "./components/Account";
+import Dashboard from "./components/Dashboard";
+import PlayersInfo from "./components/PlayersInfo";
+import Player from "./components/Player";
+import OneFantasyTeam from "./components/OneFantasyTeam";
+import FantasyTeams from "./components/FantasyTeams";
+import Game from "./components/Game";
+import UserLogin from "./components/UserLogin";
+import UserSignup from "./components/UserSignup";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<UserSignup />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/fantasy_teams" element={<FantasyTeams />} />
+        <Route path="/fantasy_teams/:name" element={<OneFantasyTeam />} />
+        <Route path="/players/info" element={<PlayersInfo />} />
+        <Route path="/players/info/:name" element={<Player />} />
+        <Route path="/fantasy_game" element={<Game />} />
+      </Routes>
     </div>
   );
 }
