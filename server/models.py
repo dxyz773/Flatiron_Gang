@@ -3,6 +3,8 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates, backref
 from sqlalchemy import MetaData
+from sqlalchemy.ext.hybrid import hybrid_property
+from app import bcrypt
 
 convention = {
     "ix": "ix_%(column_0_label)s",
@@ -29,6 +31,19 @@ class User(db.Model, SerializerMixin):
         "FantasyTeam", backref=backref("user"), cascade="all, delete-orphan"
     )
     serialize_rules = ("-fantasy_teams.user", "created_at", "-updated_at")
+
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+
 
 
 class FantasyTeam(db.Model, SerializerMixin):
