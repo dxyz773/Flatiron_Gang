@@ -31,21 +31,18 @@ A Users can:
 
 ## Client Side Routes
 
-| **Client Route**             | **Component**         |
-| ---------------------------- | --------------------- |
-| /home                        | Home.js               |
-| /account                     | Account.js            |
-| /dashboard                   | FantasyDashboard.js   |
-| /fantasy_teams               | FantasyTeams.js       |
-| /fantasy_teams/:name         | OneFantasyTeam.js     |
-| /fantasy_teams/players       | FantasyTeamPlayers.js |
-| /fantasy_teams/players/:name | OneTeamPlayer.js      |
-| /game                        | Game.js               |
-| /fantasy_teams/players/stats | FantasyPlayerStats.js |
-| /signup                      | UserSignup.js         |
-| /login                       | UserLogin.js          |
-| /nfl/news                    | News.js               |
-| /nfl/schedule                | NFLSchedule.js        |
+| **Client Route**     | **Component**     |
+| -------------------- | ----------------- |
+| /home                | Home.js           |
+| /account             | Account.js        |
+| /dashboard           | Dashboard.js      |
+| /fantasy_teams       | FantasyTeams.js   |
+| /fantasy_teams/:name | OneFantasyTeam.js |
+| /players/info        | PlayersInfo.js    |
+| /players/info/:name  | OneTeamPlayer.js  |
+| /fantasy_game        | Game.js           |
+| /signup              | UserSignup.js     |
+| /login               | UserLogin.js      |
 
 ---
 
