@@ -27,7 +27,7 @@ A Users can:
 
 ## React Tree
 
-## <img src="imgs/ReactTree.png">
+## <img src="imgs/ReactTree.png" width=800>
 
 ## Client Side Routes
 
