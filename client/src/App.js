@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Account from "./components/Account";
 import Dashboard from "./components/Dashboard";
-import PlayersInfo from "./components/PlayersInfo";
+import AllPlayers from "./components/AllPlayers";
 import Player from "./components/Player";
 import OneFantasyTeam from "./components/OneFantasyTeam";
 import FantasyTeams from "./components/FantasyTeams";
@@ -26,7 +26,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/fantasy_teams" element={<FantasyTeams />} />
         <Route path="/fantasy_teams/:name" element={<OneFantasyTeam />} />
-        <Route path="/players/info" element={<PlayersInfo />} />
+        <Route path="/players" element={<AllPlayers />} />
         <Route path="/players/info/:name" element={<Player />} />
         <Route path="/fantasy_game" element={<Game />} />
       </Routes>
