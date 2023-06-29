@@ -10,8 +10,8 @@ import Player from "./components/Player";
 import OneFantasyTeam from "./components/OneFantasyTeam";
 import FantasyTeams from "./components/FantasyTeams";
 import Game from "./components/Game";
-import UserLogin from "./components/UserLogin";
-import UserSignup from "./components/UserSignup";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Home from "./components/Home";
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<UserSignup />} />
-        <Route path="/login" element={<UserLogin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/fantasy_teams" element={<FantasyTeams />} />
