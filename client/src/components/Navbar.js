@@ -13,17 +13,40 @@ function Navbar({ updateUser, user }) {
 	}
 
 	return (
-    <header>
-        <h1>
-          <Link to={"/"}>{"//"}Flatiron Gang</Link>
-        </h1>
+        <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+        
 			<div className="container">
-          <NavLink className="button" to="/dashboard" end>
+             <a className="navbar-brand" aria-current="page">
+          <Link to={"/"}>{"//"}Flatiron Gang</Link>
+            </a>
+            <button
+          className="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+          aria-controls="nav"
+          aria-label="Expand Navigation"
+        >
+            <span className="navbar-toggler-icon"></span>
+        </button>    
+         <div className="collapse navbar-collapse" id="nav">
+         <ul className="navbar-nav">
+             
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page">
+         <NavLink className="button" to="/dashboard" end>
             Fantasy Dashboard
           </NavLink>
+              </a>
+            </li>
+          <li className="nav-item">
+              <a className="nav-link active" aria-current="page">
           <NavLink className="button" to="/players">
             NFL Player Search
           </NavLink>
+              </a>
+            </li>
+          <li className="nav-item">
+              <a className="nav-link active" aria-current="page">
           <NavLink className="button" to="/auth">
             Log In
           </NavLink>
@@ -35,10 +58,15 @@ function Navbar({ updateUser, user }) {
               <p style={{'margin-top': '8px'}}>Hello, {user.username}</p>
             </>) : 
             ''
-          }		
+          }	
+            </a>
+            </li>
+           </ul>
+         </div>
 			</div>
-    </header>
+    </nav>
 	);
+
 
 
 }

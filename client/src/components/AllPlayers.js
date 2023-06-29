@@ -29,14 +29,14 @@ function AllPlayers() {
     player.name.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <div>
+    <div className="container ">
       <Search search={search} handleChange={handleChange} />
       <h1>Player Information</h1>
-      <ul>
+      <div className="card">
         {searchedPlayers.map((player) => (
           <Player key={player.id} player={player} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
