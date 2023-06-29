@@ -55,7 +55,7 @@ function App() {
 			<Routes>
         <Route path="/" element={<Home />} />
 				< Route path = "/auth" element={<Auth updateUser={updateUser} />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/account" element={<Account user={user}/>} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/fantasy_teams" element={<FantasyTeams />} />
         <Route path="/fantasy_teams/:name" element={<OneFantasyTeam />} />
