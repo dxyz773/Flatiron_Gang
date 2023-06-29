@@ -1,66 +1,91 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
-function UserSignup() {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-  // Function to handle form submission for user signup
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+export const UserSignup = () => {
+  const [users, setUsers] = useState([{}]);
+  const [refreshPage, setRefreshPage] = useState(false);
+  // Pass the useFormik() hook initial form values and a submit function that will
+  // be called when the form is submitted
 
-    try {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, username, password }),
+  useEffect(() => {
+    console.log("FETCH! ");
+    fetch("/users")
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+        console.log(data);
       });
-      // Handle the response after user signup
-    } catch (error) {
-      console.error('Error signing up:', error);
-    }
-  };
+  }, [refreshPage]);
+
+  const formSchema = yup.object().shape({
+    name: yup.string().required("Must enter a name").max(16),
+    username: yup.string().required("Must enter a username").max(14),
+    password: yup
+      .string()
+      .password()
+      .required("Must enter password"),
+    
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      username: "",
+      password: "",
+    },
+    validationSchema: formSchema,
+    onSubmit: (values) => {
+      fetch("users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values, null, 2),
+      }).then((res) => {
+        if (res.status == 200) {
+          setRefreshPage(!refreshPage);
+        }
+      });
+    },
+  });
 
   return (
     <div>
-      <h1>User Signup</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">Sign Up</button>
+      <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
+        <label htmlFor="name">Name</label>
+        <br />
+        <input
+          id="name"
+          name="name"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+        <p style={{ color: "red" }}> {formik.errors.name}</p>
+        <label htmlFor="username">Username</label>
+        <br />
+
+        <input
+          id="username"
+          name="username"
+          onChange={formik.handleChange}
+          value={formik.values.username}
+        />
+        <p style={{ color: "red" }}> {formik.errors.username}</p>
+
+        <label htmlFor="password">Password</label>
+        <br />
+
+        <input
+          id="password"
+          name="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        <p style={{ color: "red" }}> {formik.errors.password}</p>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
-}
-
-export default UserSignup;
+};
