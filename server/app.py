@@ -396,18 +396,37 @@ class UserById(Resource):
 api.add_resource(UserById, "/users/<int:id>")
 
 
+class Signup(Resource):
+    def post(self):
+        data = request.get_json()
+        new_user = User(name=data.get('name'), username=data.get('username'))
+        # 6b. hash the given password and save it to _password_hash
+        new_user.password_hash = data.get('password')
+        # db.session add and commit
+        db.session.add(new_user)
+        db.session.commit()
+        # 6c. save the user_id in session
+        session['user_id'] = new_user.id
+        #return response
+        return make_response(new_user.to_dict(rules=('-_password_hash', )), 201)
+api.add_resource(Signup, '/signup')
+
 class Login(Resource):
     def post(self):
-        username = request.get_json()["username"]
-        user = User.query.filter(User.username == username)
+        try:
+        # 7a. check if user exists
+            data = request.get_json()
+            user = User.query.filter_by(username=data.get('username')).first()
+            # 7b. check if password is authentic
+            if user.authenticate(data.get('password')):
+                # 7c. set session's user id
+                session['user_id'] = user.id 
+                return make_response(user.to_dict(), 200)
+        except:
+            # 7d. send error 
+            return make_response({"message": "401: Not Authorized"}, 401)
 
-        password = request.get_json()["password"]
-
-        if user.authenticate(password):
-            session["user_id"] = user.id
-            return make_response(user.to_dict(), 200)
-        return make_response({"error": "Invalid username or password"}, 401)
-
+api.add_resource(Login, '/login')      
 
 class CheckSession(Resource):
     def get(self):

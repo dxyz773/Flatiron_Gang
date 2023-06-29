@@ -1,59 +1,74 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
-function Navbar() {
-  return (
-    <nav className="navbar navbar-expand-md bg-dark navbar-dark">
-      <div className="container">
-        <a className="navbar-brand" aria-current="page">
-          <Link to={"/"} style={{ textDecoration: "none" }}>
-            Flatiron Gang
-          </Link>
-        </a>
-        <button
+function Navbar({ updateUser, user }) {
+	const navigate = useNavigate();
+
+	function handleLogout() {
+		fetch("/logout").then((res) => {
+			if (res.ok){
+				updateUser(null);
+				navigate("/auth");
+			}
+		});
+	}
+
+	return (
+        <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+        
+			<div className="container">
+             <a className="navbar-brand" aria-current="page">
+          <Link to={"/"}>{"//"}Flatiron Gang</Link>
+            </a>
+            <button
           className="navbar-toggler"
           data-bs-toggle="collapse"
           data-bs-target="#nav"
           aria-controls="nav"
           aria-label="Expand Navigation"
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="nav">
-          <ul className="navbar-nav">
+            <span className="navbar-toggler-icon"></span>
+        </button>    
+         <div className="collapse navbar-collapse" id="nav">
+         <ul className="navbar-nav">
+             
             <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
-                  Fantasy Dashboard
-                </Link>
+         <NavLink className="button" to="/dashboard" end>
+            Fantasy Dashboard
+          </NavLink>
               </a>
             </li>
-            <li className="nav-item">
+          <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <Link to={"/players"} style={{ textDecoration: "none" }}>
-                  NFL Player Search
-                </Link>
+          <NavLink className="button" to="/players">
+            NFL Player Search
+          </NavLink>
               </a>
             </li>
-            <li className="nav-item">
+          <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <Link to={"/login"} style={{ textDecoration: "none" }}>
-                  User Login
-                </Link>
-              </a>
+          <NavLink className="button" to="/auth">
+            Log In
+          </NavLink>
+          { user ? 
+            (<>
+              <button onClick={handleLogout} className="button">
+                Log Out
+              </button>
+              <p style={{'margin-top': '8px'}}>Hello, {user.username}</p>
+            </>) : 
+            ''
+          }	
+            </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page">
-                <Link to={"/signup"} style={{ textDecoration: "none" }}>
-                  Sign up
-                </Link>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+           </ul>
+         </div>
+			</div>
     </nav>
-  );
+	);
+
+
+
 }
 
 export default Navbar;
