@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 import Account from "./components/Account";
 import Dashboard from "./components/Dashboard";
 import AllPlayers from "./components/AllPlayers";
