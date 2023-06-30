@@ -14,48 +14,45 @@ import Auth from "./components/Auth";
 
 import Home from "./components/Home";
 
-
-
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    getUser()
+    getUser();
   }, []);
 
   const updateUser = (user) => {
-    setUser(user)
-  }
+    setUser(user);
+  };
 
   const getUser = () => {
-    fetch('/check_session')
-    .then(res => {
-      if(res.ok){
-        res.json().then(data => {
-          setUser(data)
-        })
+    fetch("/check_session").then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setUser(data);
+        });
       } else {
-        setUser(null)
+        setUser(null);
       }
-    })
-  }
+    });
+  };
 
-  if (!user){
-		return (
-			<div className="Flatiron Gang">
-				<Navbar updateUser={updateUser} user={user} />
-				<Auth updateUser={updateUser} />
-			</div>
-		)
-	}
-  
+  // if (!user) {
+  //   return (
+  //     <div className="Flatiron Gang">
+  //       <Navbar updateUser={updateUser} user={user} />
+  //       <Auth updateUser={updateUser} />
+  //     </div>
+  //   );
+  // }
+
   return (
     <div className="Flatiron Gang">
       <Navbar updateUser={updateUser} user={user} />
-			<Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
-				< Route path = "/auth" element={<Auth updateUser={updateUser} />} />
-        <Route path="/account" element={<Account user={user}/>} />
+        <Route path="/auth" element={<Auth updateUser={updateUser} />} />
+        <Route path="/account" element={<Account updateUser={updateUser} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/fantasy_teams" element={<FantasyTeams />} />
         <Route path="/fantasy_teams/:name" element={<OneFantasyTeam />} />

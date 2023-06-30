@@ -1,5 +1,5 @@
 import React from "react";
-function Player({ player }) {
+function Player({ player, handleDelete }) {
   return (
     <div>
       <ul>
@@ -8,6 +8,7 @@ function Player({ player }) {
           <p>Position: {player.position}</p>
           <p>NFL Team: {player.nfl_team}</p>
           <p>Bye Week: {player.bye_week}</p>
+          <button onClick={() => handleDelete(player.id)}></button>
           {/* Render other player properties as needed */}
         </li>
       </ul>

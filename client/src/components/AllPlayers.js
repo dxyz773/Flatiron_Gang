@@ -25,6 +25,14 @@ function AllPlayers() {
   function handleChange(e) {
     setSearch(e.target.value);
   }
+  function handleDelete(id) {
+    fetch(`http://127.0.0.1:5555/players/${id}`).then(
+      players.filter((player) =>
+        player.id !== id ? setPlayers([...players, player]) : null
+      )
+    );
+  }
+
   let searchedPlayers = players.filter((player) =>
     player.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -34,7 +42,7 @@ function AllPlayers() {
       <h1>Player Information</h1>
       <div className="card">
         {searchedPlayers.map((player) => (
-          <Player key={player.id} player={player} />
+          <Player key={player.id} player={player} handleDelete={handleDelete} />
         ))}
       </div>
     </div>
