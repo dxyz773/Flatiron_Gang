@@ -1,14 +1,10 @@
-# Flatiron Gang
+# Flatiron Gang NFL Lover
 
-#### Explore the ultimate fantasy football management experience with our app, where you can draft, strategize, and build the team of your dreams to compete in leagues with family & friends for the right to call yourself a CHAMPION
+#### Indulge in your NFL obsession with 🏈 Flatiron Gang NFL Lover! Sign up with us and let the NFL fun begin! Be the 🏆 champion of your Fantasy football league by searching our NFL player data base and liking your favorite NFL players. You'll be ahead of the game and ready for that much anticipated Fantasy Football Draft.
 
 ---
 
 ## Wireframes
-
-<img src="imgs/Homepage.png" width=600>
-<img src="imgs/Fantasy Dashboard.png" width=600>
-<img src="imgs/Users Players .png" width=600>
 
 ---
 
@@ -16,33 +12,29 @@
 
 A Users can:
 
-- Create and personalize my fantasy football team by selecting players from a variety of teams and positions.
-- Have a user-friendly interface that allows them to readily navigate through the app's various sections, such as team management, league standings, and player statistics.
-- Access a comprehensive player database containing detailed player profiles, historical performance data, and expert analysis to facilitate strategic decision-making.
-- Participate in weekly matches
-- Compete against other teams in League
-- Receive updates regarding player injuries, lineup changes.
+- Signup for a user account on Flatiron Gang NFL Lover App
+- Login to user account
+- Search through a database of NFL players by player name and see the player's information.
+- Like their favorite NFL players
+- update name on user account
+- Logout of user account
 
 ---
 
 ## React Tree
 
-## <img src="imgs/ReactTree.png" width=800>
+## <img src="imgs/react_tree.png" width=600>
 
 ## Client Side Routes
 
-| **Client Route**     | **Component**     |
-| -------------------- | ----------------- |
-| /home                | Home.js           |
-| /account             | Account.js        |
-| /dashboard           | Dashboard.js      |
-| /fantasy_teams       | FantasyTeams.js   |
-| /fantasy_teams/:name | OneFantasyTeam.js |
-| /players/info        | PlayersInfo.js    |
-| /players/info/:name  | OneTeamPlayer.js  |
-| /fantasy_game        | Game.js           |
-| /signup              | UserSignup.js     |
-| /login               | UserLogin.js      |
+| **Client Route** | **Component** |
+| ---------------- | ------------- |
+| /                | Home.js       |
+| /account         | Account.js    |
+| /mylikes         | MyLikes.js    |
+| /players         | AllPlayers.js |
+| /players/:id     | Player.js     |
+| /auth            | Auth.js       |
 
 ---
 
