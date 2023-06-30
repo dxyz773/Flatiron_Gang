@@ -1,17 +1,17 @@
+import React, { useState } from "react";
 
-
-function Account({ user }) {
-    const { name, username, id } = user;
+function Account({ updateUser }) {
+  const { name, username, id } = updateUser;
 
   return (
     <li className="card" id={id}>
-    <section className="details">
+      <section className="details">
+        <p>ID: {id}</p>
         <p>Name: {name}</p>
         <p>Username: {username}</p>
-    </section>
-</li>
-  )
+      </section>
+    </li>
+  );
 }
 
 export default Account;
-

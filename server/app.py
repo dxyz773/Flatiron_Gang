@@ -135,6 +135,16 @@ class PlayerById(Resource):
         )
         return response
 
+    def delete(self, id):
+        player = Player.query.filter(Player.id == id).first()
+        if player:
+            db.session.delete(player)
+            db.session.commit()
+            response = make_response({}, 200)
+            return response
+        return make_response({"errors": "Player not found"})
+
+
 
 api.add_resource(PlayerById, "/players/<int:id>")
 
@@ -420,13 +430,13 @@ class Login(Resource):
             # 7b. check if password is authentic
             if user.authenticate(data.get('password')):
                 # 7c. set session's user id
-                session['user_id'] = user.id 
+                session['user_id'] = user.id
                 return make_response(user.to_dict(), 200)
         except:
-            # 7d. send error 
+            # 7d. send error
             return make_response({"message": "401: Not Authorized"}, 401)
 
-api.add_resource(Login, '/login')      
+api.add_resource(Login, '/login')
 
 class CheckSession(Resource):
     def get(self):
