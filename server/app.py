@@ -182,7 +182,7 @@ class Signup(Resource):
             name=data.get("name"), username=data.get("username"), img=data.get("img")
         )
         # 6b. hash the given password and save it to _password_hash
-        new_fan.password_hash = data.get("password")
+        new_fan.password_hash_setter = data.get("password")
         # db.session add and commit
         db.session.add(new_fan)
         db.session.commit()
@@ -205,10 +205,10 @@ class Login(Resource):
             if fan.authenticate(data.get("password")):
                 # 7c. set session's user id
                 session["user_id"] = fan.id
-                return make_response(fan.to_dict(), 200)
+                return fan.to_dict()
         except:
             # 7d. send error
-            return make_response({"message": "401: Not Authorized"}, 401)
+            return {"message": "401: Not Authorized"}
 
 
 api.add_resource(Login, "/login")
@@ -218,9 +218,9 @@ class CheckSession(Resource):
     def get(self):
         user = Fan.query.filter(Fan.id == session.get("user_id")).first()
         if user:
-            return make_response(user.to_dict(), 200)
+            return (user.to_dict(), 200)
         else:
-            return make_response({"message": "401: Not Authorized"}, 401)
+            return {"message": "401: Not Authorized"}
 
 
 api.add_resource(CheckSession, "/check_session")
@@ -229,7 +229,7 @@ api.add_resource(CheckSession, "/check_session")
 class Logout(Resource):
     def delete(self):
         session["user_id"] = None
-        return make_response({"message": "204: No Content"}, 204)
+        return {"message": "204: No Content"}
 
 
 api.add_resource(Logout, "/logout")

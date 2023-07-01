@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function Account({ updateUser }) {
-  const { name, username, id } = updateUser;
+function Account({ user }) {
+  const { name, username, id } = user;
 
   return (
     <li className="card" id={id}>

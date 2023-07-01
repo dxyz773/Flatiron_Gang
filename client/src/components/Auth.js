@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function Auth({ updateUser }) {
+function Auth({ updateUser}) {
   const [signup, setSignup] = useState(true);
   // 8a. create state error
 

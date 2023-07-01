@@ -48,7 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth updateUser={updateUser} />} />
-        <Route path="/account" element={<Account updateUser={updateUser} />} />
+        <Route path="/account" element={<Account user={user} />} />
         <Route path="/my_likes" element={<MyLikes />} />
         <Route path="/players" element={<AllPlayers />} />
         <Route path="/players/info/:name" element={<Player />} />
