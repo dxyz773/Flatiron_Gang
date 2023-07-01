@@ -17,7 +17,9 @@ function Navbar({ updateUser, user }) {
     <nav className="navbar navbar-expand-md bg-dark navbar-dark">
       <div className="container">
         <a className="navbar-brand" aria-current="page">
-          <Link to={"/"}>Flatiron Gang</Link>
+          <Link style={{ textDecoration: "none" }} to={"/"}>
+            Flatiron Gang NFL Lover
+          </Link>
         </a>
         <button
           className="navbar-toggler"
@@ -32,28 +34,44 @@ function Navbar({ updateUser, user }) {
           <ul className="navbar-nav">
             <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <NavLink className="button" to="/dashboard" end>
-                  Fantasy Dashboard
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  className="button"
+                  to="/players"
+                >
+                  NFL Player Database
                 </NavLink>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <NavLink className="button" to="/players">
-                  NFL Player Search
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  className="button"
+                  to="/my_likes"
+                >
+                  My Likes
                 </NavLink>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <NavLink className="button" to="/account">
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  className="button"
+                  to="/account"
+                >
                   Account
                 </NavLink>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link active" aria-current="page">
-                <NavLink className="button" to="/auth">
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  className="button"
+                  to="/auth"
+                >
                   Log In
                 </NavLink>
                 {user ? (
