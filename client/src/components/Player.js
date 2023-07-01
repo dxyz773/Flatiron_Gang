@@ -16,8 +16,7 @@ function Player({ player }) {
         <div className="card-text" style={{ lineHeight: 1.2 }}>
           <p>{player.team}</p>
           <p>
-            <span>Position: </span>
-            {player.position}
+            <span>Position: </span> {player.position}
           </p>
           <p>
             <span>#:</span> {player.number}
@@ -27,6 +26,23 @@ function Player({ player }) {
           </p>
           <p>
             <span>Bye Week:</span> {player.bye_week}
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={() => {
+              setLiked((prev) => prev + 1);
+            }}
+          >
+            <span role="img" aria-label="like heart">
+              Like ❤️
+            </span>
+          </button>
+          <p
+            style={{ paddingTop: "12px", fontWeight: "bold", fontSize: "18px" }}
+          >
+            {liked}
           </p>
         </div>
       </div>
