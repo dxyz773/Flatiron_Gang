@@ -46,22 +46,22 @@ A Users can:
 
 ## API Routes
 
-| **Name** | **API endpoint**   | **HTTP verb** | **Purpose**                                                                                                                                       |
-| -------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RETRIEVE | /players           | **GET**       | [{...}, {...}, ...]                                                                                                                               |
-| RETRIEVE | /players/:id       | **GET**       | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
-| UPDATE   | /players/:id       | **PATCH**     | {'id', 'name', 'position', 'nfl_team', 'bye-week','fantasy_team_id','week_1_points'....'week_14_points','playoff_points', 'championship_points' } |
-| RETRIEVE | /fantasy_teams     | **GET**       | [{...},{...}, ...]                                                                                                                                |
-| CREATE   | /fantasy_teams     | **POST**      | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
-| RETRIEVE | /fantasy_teams/:id | **GET**       | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
-| UPDATE   | /fantasy_teams/:id | **PATCH**     | {'id','team_name', 'league_id', 'user_id'}                                                                                                        |
-| RETRIEVE | /games             | **GET**       | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
-| UPDATE   | /games/:id         | **PATCH**     | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
-| RETRIEVE | /games/:id         | **GET**       | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
-| CREATE   | /games             | **POST**      | {'id', 'team_1_id', 'team_2_id', 'team_1_score','team_2_score', 'winner_id'}                                                                      |
-| RETRIEVE | /users             | **GET**       | [{...}, {...}, ...]                                                                                                                               |
-| RETRIEVE | /users/:id         | **GET**       | {'id', 'name', 'username'}                                                                                                                        |
-| DELETE   | /users/:id         | **DELETE**    | {}                                                                                                                                                |
+| API Route      | Request Method | Body                            | Response                                               |
+| -------------- | -------------- | ------------------------------- | ------------------------------------------------------ |
+| /players       | GET            |                                 | [{...},{...},...]                                      |
+| /players/:id   | GET            |                                 | {id, img, name, age, team, position, number, bye_week} |
+| /likes         | GET            |                                 | [{...},{...},...]                                      |
+| /likes         | POST           | {like_type, fan_id, player_id}  | {id, like_type, fan_id, player_id}                     |
+| /likes/:id     | GET            |                                 | {id, like_type, fan_id, player_id}                     |
+| /likes/:id     | DELETE         |                                 | {}                                                     |
+| /fans          | GET            |                                 | [{...},{...},...]                                      |
+| /fans          | POST           | {name, img, username, password} | {id, name, img, username}                              |
+| /fans/:id      | GET            |                                 | {id, name, img, username}                              |
+| /fans/:id      | PATCH          | {name, image}                   | {id, name, img, username}                              |
+| /fans/:id      | DELETE         |                                 | {}                                                     |
+| /login         | POST           | {username, password}            | {id, name, img, username}                              |
+| /check_session | GET            |                                 | {id, name, img, username}                              |
+| /logout        | DELETE         |                                 | {}                                                     |
 
 ---
 
