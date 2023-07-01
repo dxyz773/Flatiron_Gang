@@ -4,7 +4,7 @@ function Navbar({ updateUser, user }) {
 	const navigate = useNavigate();
 
 	function handleLogout() {
-		fetch("/logout").then((res) => {
+		fetch("http://127.0.0.1:5555/logout").then((res) => {
 			if (res.ok){
 				updateUser(null);
 				navigate("/auth");
