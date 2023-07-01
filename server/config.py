@@ -17,7 +17,7 @@ metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///fantasy.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///flatiron_gang.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 CORS(app)
 migrate = Migrate(app, db)
