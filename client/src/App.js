@@ -1,18 +1,14 @@
 // import './App.css';
 import React from "react";
-import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Account from "./components/Account";
-import Dashboard from "./components/Dashboard";
 import AllPlayers from "./components/AllPlayers";
 import Player from "./components/Player";
-import OneFantasyTeam from "./components/OneFantasyTeam";
-import FantasyTeams from "./components/FantasyTeams";
-import Game from "./components/Game";
 import Auth from "./components/Auth";
-
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import MyLikes from "./components/MyLikes";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -53,12 +49,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth updateUser={updateUser} />} />
         <Route path="/account" element={<Account updateUser={updateUser} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/fantasy_teams" element={<FantasyTeams />} />
-        <Route path="/fantasy_teams/:name" element={<OneFantasyTeam />} />
+        <Route path="/my_likes" element={<MyLikes />} />
         <Route path="/players" element={<AllPlayers />} />
         <Route path="/players/info/:name" element={<Player />} />
-        <Route path="/fantasy_game" element={<Game />} />
       </Routes>
     </div>
   );
