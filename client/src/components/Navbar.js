@@ -5,7 +5,7 @@ function Navbar({ updateUser, user }) {
   const navigate = useNavigate();
 
   function handleLogout() {
-    fetch("http://127.0.0.1:5555/logout").then((res) => {
+    fetch("http://127.0.0.1:5555/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
         updateUser(null);
         navigate("/auth");
@@ -14,7 +14,10 @@ function Navbar({ updateUser, user }) {
   }
 
   return (
-    <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav
+      className="navbar navbar-expand-md"
+      style={{ backgroundColor: "#172554" }}
+    >
       <div className="container">
         <a className="navbar-brand" aria-current="page">
           <Link style={{ textDecoration: "none" }} to={"/"}>
@@ -79,9 +82,7 @@ function Navbar({ updateUser, user }) {
                     <button onClick={handleLogout} className="button">
                       Log Out
                     </button>
-                    <p style={{ "margin-top": "8px" }}>
-                      Hello, {user.username}
-                    </p>
+                    <p style={{ marginTop: "8px" }}>Hello, {user.username}</p>
                   </div>
                 ) : (
                   ""

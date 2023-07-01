@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function Auth({ updateUser}) {
-  const [signup, setSignup] = useState(true);
+function Auth({ updateUser }) {
+  const [signup, setSignup] = useState(false);
   // 8a. create state error
 
   const navigate = useNavigate();

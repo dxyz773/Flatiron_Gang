@@ -20,9 +20,21 @@ function AllPlayers() {
     player.name.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <div className="container ">
-      <Search search={search} handleChange={handleChange} />
-      <h1>Player Information</h1>
+    <div className="container">
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          gap: "20px",
+          alignItems: "center",
+          marginTop: "30px",
+          marginBottom: "20px",
+        }}
+      >
+        <h2 style={{ color: "#eff6ff" }}>Player Database</h2>
+        <Search search={search} handleChange={handleChange} />
+      </div>
+
       <div className="container fluid">
         <div className="card-group">
           {searchedPlayers.map((player) => (
