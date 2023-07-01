@@ -13,18 +13,7 @@ class Players(Resource):
     def get(self):
         all_players = Player.query.all()
         players_dict = [
-            player.to_dict(
-                only=(
-                    "id",
-                    "img",
-                    "name",
-                    "age",
-                    "team",
-                    "position",
-                    "number",
-                    "bye_week",
-                )
-            )
+            player.to_dict(rules=("-created_at", "-updated_at"))
             for player in all_players
         ]
         response = make_response(players_dict, 200)
@@ -42,18 +31,7 @@ class PlayerById(Resource):
             return make_response({"error": "Player not found"}, 404)
 
         response = make_response(
-            player.to_dict(
-                only=(
-                    "id",
-                    "img",
-                    "name",
-                    "age",
-                    "team",
-                    "position",
-                    "number",
-                    "bye_week",
-                )
-            ),
+            player.to_dict(rules=("-created_at", "-updated_at")),
             200,
         )
         return response
@@ -65,10 +43,7 @@ api.add_resource(PlayerById, "/players/<int:id>")
 class Likes(Resource):
     def get(self):
         all_likes = Like.query.all()
-        likes_dict = [
-            likes.to_dict(only=("id", "like_type", "fan_id,", "player_id"))
-            for likes in all_likes
-        ]
+        likes_dict = [likes.to_dict() for likes in all_likes]
         response = make_response(likes_dict, 200)
         return response
 
@@ -82,14 +57,14 @@ class Likes(Resource):
                 player_id=data.get("player_id"),
             )
 
-            db.session.add(new_like.to_dict())
+            db.session.add(new_like)
             db.session.commit()
 
         except:
             return make_response({"errors": ["validation errors"]}, 400)
 
         response = make_response(
-            new_like.to_dict(only=("id", "like_type", "fan_id", "player_id")), 201
+            new_like.to_dict(rules=("-created_at", "-updated_at")), 201
         )
         return response
 
@@ -104,9 +79,7 @@ class LikesById(Resource):
         if not like:
             return make_response({"error": "FantasyTeam not found"}, 404)
 
-        response = make_response(
-            like.to_dict(only=("id", "like_type", "fan_id", "player_id")), 200
-        )
+        response = make_response(like.to_dict(), 200)
 
         return response
 
@@ -136,7 +109,7 @@ class Fans(Resource):
         all_fans = Fan.query.all()
 
         fans_dict = [
-            fan.to_dict(only=("id", "name", "username", "img")) for fan in all_fans
+            fan.to_dict(rules=("-created_at", "-updated_at")) for fan in all_fans
         ]
 
         response = make_response(fans_dict, 200)
@@ -153,7 +126,7 @@ class FansById(Resource):
         if not fan:
             return make_response({"error": "User not found"}, 404)
 
-        response = make_response(fan.to_dict(only=("id", "name", "username")), 200)
+        response = make_response(fan.to_dict(rules=("-creatd_at", "-updated_at")), 200)
         return response
 
     def patch(self, id):
@@ -168,14 +141,14 @@ class FansById(Resource):
             for attr in data:
                 setattr(fan, attr, data.get(attr))
 
-                db.session.add(fan.to_dict)
+                db.session.add(fan)
                 db.session.commit()
 
         except:
             return make_response({"errors": ["validation errors"]}, 400)
 
         response = make_response(
-            fan.to_dict(only=("id", "name", "username", "image")),
+            fan.to_dict(rules=("-created_at", "-updated_at")),
             202,
         )
 
@@ -185,12 +158,18 @@ class FansById(Resource):
         fan = Fan.query.filter(Fan.id == id).first()
 
         if not fan:
-            return make_response({"error": "User not found"}, 404)
+            return make_response({"error": "FantasyTeam not found"}, 404)
 
-        db.session.delete(fan.to_dict())
-        db.commit()
+        try:
+            db.session.delete(fan)
+            db.session.commit()
 
-        return make_response({}, 204)
+        except:
+            return make_response({"errors": ["validation errors"]}, 400)
+
+        response = make_response({}, 200)
+
+        return response
 
 
 api.add_resource(FansById, "/fans/<int:id>")
