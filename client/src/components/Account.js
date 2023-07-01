@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
 function Account({ user }) {
-  const { name, username, id } = user;
+  const { name, username, id, img } = user;
 
   return (
-    <li className="card" id={id}>
+    <div className="card" id={id} style={{ width: "300px" }}>
       <section className="details">
-        <p>ID: {id}</p>
+        <img src={img} width={200} alt="user"></img>
         <p>Name: {name}</p>
         <p>Username: {username}</p>
       </section>
-    </li>
+    </div>
   );
 }
 
