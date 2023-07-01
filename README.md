@@ -40,7 +40,7 @@ A Users can:
 
 ## Entity Relationship Diagram
 
-<img src="imgs/ERD.png" width=700>
+<img src="imgs/ERD.png" width=600>
 
 ---
 
