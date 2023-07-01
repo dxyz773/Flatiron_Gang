@@ -192,7 +192,7 @@ class Signup(Resource):
         return make_response(new_fan.to_dict(rules=("-_password_hash",)), 201)
 
 
-api.add_resource(Signup, "/fans")
+api.add_resource(Signup, "/signup")
 
 
 class Login(Resource):

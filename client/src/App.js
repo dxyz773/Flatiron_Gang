@@ -22,7 +22,7 @@ function App() {
   };
 
   const getUser = () => {
-    fetch("/check_session").then((res) => {
+    fetch("http://127.0.0.1:5555/check_session").then((res) => {
       if (res.ok) {
         res.json().then((data) => {
           setUser(data);
@@ -33,14 +33,14 @@ function App() {
     });
   };
 
-  // if (!user) {
-  //   return (
-  //     <div className="Flatiron Gang">
-  //       <Navbar updateUser={updateUser} user={user} />
-  //       <Auth updateUser={updateUser} />
-  //     </div>
-  //   );
-  // }
+  if (!user) {
+    return (
+      <div className="Flatiron Gang">
+        <Navbar updateUser={updateUser} user={user} />
+        <Auth updateUser={updateUser} />
+      </div>
+    );
+  }
 
   return (
     <div className="Flatiron Gang">
