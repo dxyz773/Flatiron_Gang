@@ -198,16 +198,13 @@ api.add_resource(Signup, "/signup")
 class Login(Resource):
     def post(self):
         try:
-            # 7a. check if user exists
             data = request.get_json()
-            fan = Fan.query.filter_by(username=data.get("username")).first()
-            # 7b. check if password is authentic
+            fan = Fan.query.filter_by(data.get("username")).first()
+
             if fan.authenticate(data.get("password")):
-                # 7c. set session's user id
                 session["user_id"] = fan.id
                 return fan.to_dict()
         except:
-            # 7d. send error
             return {"message": "401: Not Authorized"}
 
 
@@ -219,8 +216,6 @@ class CheckSession(Resource):
         user = Fan.query.filter(Fan.id == session.get("user_id")).first()
         if user:
             return (user.to_dict(), 200)
-        else:
-            return {"message": "401: Not Authorized"}
 
 
 api.add_resource(CheckSession, "/check_session")
