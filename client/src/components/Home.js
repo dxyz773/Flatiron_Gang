@@ -23,7 +23,7 @@ function Home() {
             <button type="button" className="btn btn-primary">
               <Link
                 style={{ textDecoration: "none", color: "white" }}
-                to="/auth"
+                to="/signup"
               >
                 Sign Up
               </Link>
@@ -32,7 +32,7 @@ function Home() {
             <button className="btn btn-primary">
               <Link
                 style={{ textDecoration: "none", color: "white" }}
-                to="/auth"
+                to="/login"
               >
                 Login
               </Link>

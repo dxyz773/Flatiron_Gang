@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, redirect } from "react-router-dom";
 
 function Navbar({ updateUser, user }) {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ function Navbar({ updateUser, user }) {
     fetch("http://127.0.0.1:5555/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
         updateUser(null);
-        navigate("/auth");
+        navigate("/");
       }
     });
   }
@@ -46,22 +46,28 @@ function Navbar({ updateUser, user }) {
         >
           Account
         </NavLink>
-
         <NavLink
           style={{ textDecoration: "none" }}
           className="button"
-          to="/auth"
+          to="/login"
         >
           Log In
         </NavLink>
+        <NavLink
+          style={{ textDecoration: "none" }}
+          className="button"
+          to="signup"
+        >
+          Signup
+        </NavLink>
         {user ? (
-          <div>
-            <button onClick={handleLogout} className="btn btn-success">
-              Log Out
-            </button>
-            <p style={{ marginTop: "8px", color: "white" }}>
+          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <p style={{ marginTop: "15px", color: "white" }}>
               Hello, {user.username}
             </p>
+            <button onClick={handleLogout} className="btn  btn-primary">
+              Log Out
+            </button>
           </div>
         ) : (
           ""

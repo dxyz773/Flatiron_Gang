@@ -1,11 +1,11 @@
-// import './App.css';
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Account from "./components/Account";
 import AllPlayers from "./components/AllPlayers";
 import Player from "./components/Player";
-import Auth from "./components/Auth";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import MyLikes from "./components/MyLikes";
@@ -33,25 +33,17 @@ function App() {
     });
   };
 
-  if (!user) {
-    return (
-      <div className="Flatiron Gang">
-        <Navbar updateUser={updateUser} user={user} />
-        <Auth updateUser={updateUser} />
-      </div>
-    );
-  }
-
   return (
     <div className="Flatiron Gang">
       <Navbar updateUser={updateUser} user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth updateUser={updateUser} />} />
+        <Route path="/login" element={<Login updateUser={updateUser} />} />
+        <Route path="/signup" element={<Signup updateUser={updateUser} />} />
         <Route path="/account" element={<Account user={user} />} />
-        <Route path="/my_likes" element={<MyLikes />} />
-        <Route path="/players" element={<AllPlayers />} />
-        <Route path="/players/info/:name" element={<Player />} />
+        <Route path="/my_likes" element={<MyLikes user={user} />} />
+        <Route path="/players" element={<AllPlayers user={user} />} />
+        <Route path="/players/info/:name" element={<Player user={user} />} />
       </Routes>
     </div>
   );
