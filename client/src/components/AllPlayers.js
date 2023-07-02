@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Search from "./Search";
 import Player from "./Player";
 
-function AllPlayers() {
+function AllPlayers({ user }) {
   const [players, setPlayers] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -38,7 +38,7 @@ function AllPlayers() {
       <div className="container fluid">
         <div className="card-group">
           {searchedPlayers.map((player) => (
-            <Player key={player.id} player={player} />
+            <Player key={player.id} player={player} user={user} />
           ))}
         </div>
       </div>

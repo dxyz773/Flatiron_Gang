@@ -17,7 +17,7 @@ function Login({ updateUser }) {
     },
     validationSchema: formSchema,
     onSubmit: (values, actions) => {
-      fetch("http://127.0.0.1:5555//login", {
+      fetch("http://127.0.0.1:5555/login", {
         method: "POST",
         headers: {
           "content-type": "application/json",

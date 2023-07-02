@@ -1,6 +1,10 @@
 import React from "react";
-function MyLikes() {
-  return <div>Hello</div>;
+function MyLikes({ user }) {
+  return (
+    <div className="container">
+      <div className="btn btn-primary">View my Likes</div>
+    </div>
+  );
 }
 
 export default MyLikes;

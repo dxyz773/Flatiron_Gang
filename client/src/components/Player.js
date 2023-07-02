@@ -1,6 +1,24 @@
 import React, { useState } from "react";
-function Player({ player }) {
+function Player({ player, user }) {
   const [liked, setLiked] = useState(0);
+
+  function handleLike() {
+    fetch(
+      "http://127.0.0.1:5555/likes",
+
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          like_type: "like",
+          fan_id: user.id,
+          player_id: player.id,
+        }),
+      }
+    ).then(setLiked((prev) => prev + 1));
+  }
   return (
     <div className="card" key={player.id} style={{ maxWidth: 250 }}>
       <div className="card-body">
@@ -29,12 +47,7 @@ function Player({ player }) {
           </p>
         </div>
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <button
-            className="btn btn-sm btn-primary"
-            onClick={() => {
-              setLiked((prev) => prev + 1);
-            }}
-          >
+          <button className="btn btn-sm btn-primary" onClick={handleLike}>
             <span role="img" aria-label="like heart">
               Like ❤️
             </span>
