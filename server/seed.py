@@ -96,38 +96,60 @@ with app.app_context():
         bye_week=14,
     )
 
-    #  name="Colt McCoy",
-    # position="QB",
-    # team="Arizona Cardinals",
-    # bye_week=14,
-    # player3 = Player(
-    #     name="James Conner",
-    #     position="RB",
-    #     nfl_team="Arizona Cardinals",
-    #     bye_week=14,
-    # )
+    player7 = Player(
+        img="https://static.clubs.nfl.com/image/private/t_thumb_squared_2x/f_auto/cardinals/uxyg7jyvmvejp9pdnmgb.jpg",
+        name="Rondale Moore",
+        age=23,
+        team="Arizona Cardinals",
+        position="WR",
+        number=4,
+        bye_week=14,
+    )
+
+    player8 = Player(
+        img="https://static.clubs.nfl.com/image/private/t_thumb_squared_2x/f_auto/cardinals/pqsxewzifkymyhrxxvuh.jpg",
+        name="Colt McCoy",
+        age=36,
+        team="Arizona Cardinals",
+        position="QB",
+        number=12,
+        bye_week=14,
+    )
+
+    player9 = Player(
+        img="https://static.clubs.nfl.com/image/private/t_thumb_squared_2x/f_auto/cardinals/elrihqhehaerm2hdhwum.jpg",
+        name="James Conner",
+        age=28,
+        team="Arizona Cardinals",
+        position="RB",
+        number=6,
+        bye_week=14,
+    )
+
+    player10 = Player(
+        img="https://static.clubs.nfl.com/image/private/t_thumb_squared_2x/f_auto/cardinals/vyd6o3gmnnc0ricz4hsl.jpg",
+        name="Trey McBride",
+        age=23,
+        team="Arizona Cardinals",
+        position="TE",
+        number=85,
+        bye_week=14,
+    )
     # player4 = Player(
     #     name="Keaontay Ingram", position="RB", nfl_team="Arizona Cardinals", bye_week=14
     # )
 
-    # player6 = Player(
-    #     name="Rondale Moore",
-    #     position="WR",
-    #     nfl_team="Arizona Cardinals",
-    #     bye_week=14,
-    # )
-    # player7 = Player(
-    #     name="Greg Dortch",
-    #     position="TE",
-    #     nfl_team="Arizona Cardinals",
-    #     bye_week=14,
-    # )
-    # player8 = Player(
-    #     name="Trey McBride",
-    #     position="TE",
-    #     nfl_team="Arizona Cardinals",
-    #     bye_week=14,
-    # )
+    #
+    player11 = Player(
+        img="https://static.clubs.nfl.com/image/private/t_thumb_squared_2x/f_auto/cardinals/lqucxk21qzfaqqbsapnn.jpg",
+        name="Greg Dortch",
+        age=25,
+        position="TE",
+        team="Arizona Cardinals",
+        number=83,
+        bye_week=14,
+    )
+
     # player9 = Player(
     #     name="Zach Ertz",
     #     position="TE",
@@ -211,6 +233,11 @@ with app.app_context():
         player4,
         player5,
         player6,
+        player7,
+        player8,
+        player9,
+        player10,
+        player11,
     ]
     db.session.add_all(players)
 

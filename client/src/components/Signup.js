@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -142,6 +142,12 @@ function Signup({ updateUser }) {
           value="signup"
         ></input>
       </form>
+      <button style={{ marginTop: "40px" }} className="btn btn-warning">
+        <Link style={{ textDecoration: "none", color: "black" }} to={"/login"}>
+          Already have an account?
+          <br /> Login here
+        </Link>
+      </button>
     </div>
   );
 }

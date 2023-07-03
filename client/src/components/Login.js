@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function Login({ updateUser }) {
+function Login({ updateUser, user }) {
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
@@ -24,13 +24,11 @@ function Login({ updateUser }) {
         },
         body: JSON.stringify(values),
       }).then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            actions.resetForm();
-            updateUser(data);
-            navigate("/");
-          });
-        }
+        res.json().then((data) => {
+          updateUser(data);
+          actions.resetForm();
+          navigate("/");
+        });
       });
     },
   });
@@ -90,7 +88,12 @@ function Login({ updateUser }) {
           value="Login"
         ></input>
       </form>
-      <div className="btn">Don't have an account yet, Signup here </div>
+      <button style={{ marginTop: "40px" }} className="btn btn-warning">
+        <Link style={{ textDecoration: "none", color: "black" }} to={"/signup"}>
+          Don't have an account yet?
+          <br /> Signup here
+        </Link>
+      </button>
     </div>
   );
 }

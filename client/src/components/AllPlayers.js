@@ -37,9 +37,11 @@ function AllPlayers({ user }) {
 
       <div className="container fluid">
         <div className="card-group">
-          {searchedPlayers.map((player) => (
-            <Player key={player.id} player={player} user={user} />
-          ))}
+          <div className="row">
+            {searchedPlayers.map((player) => (
+              <Player key={player.id} player={player} user={user} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
