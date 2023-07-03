@@ -39,7 +39,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login updateUser={updateUser} />} />
-        <Route path="/signup" element={<Signup updateUser={updateUser} />} />
+        <Route
+          path="/signup"
+          element={<Signup updateUser={updateUser} user={user} />}
+        />
         <Route path="/account" element={<Account user={user} />} />
         <Route path="/my_likes" element={<MyLikes user={user} />} />
         <Route path="/players" element={<AllPlayers user={user} />} />

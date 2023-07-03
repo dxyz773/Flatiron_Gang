@@ -17,10 +17,12 @@ metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
 app = Flask(__name__)
-app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K'
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///flatiron_gang.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 CORS(app)
+app.secret_key = b"Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K"
 migrate = Migrate(app, db)
 db.init_app(app)
 api = Api(app)

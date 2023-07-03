@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, NavLink, useNavigate, redirect } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar({ updateUser, user }) {
   const navigate = useNavigate();
 
   function handleLogout() {
-    fetch("http://127.0.0.1:5555/logout", { method: "DELETE" }).then((res) => {
+    fetch("http://127.0.0.1:5555/logout").then((res) => {
       if (res.ok) {
         updateUser(null);
         navigate("/");

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Account({ user }) {
   const { name, username, id, img } = user;
